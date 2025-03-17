@@ -1,0 +1,28 @@
+{
+  "id": "bbm-2024-01",
+  "title": "Harga BBM Hari Ini: Pertamina, Shell, hingga BP-AKR Januari 2024",
+  "publishDate": "2024-01-10T08:00:00Z",
+  "lastUpdated": "2024-01-10T08:00:00Z",
+  "content": "PT Pertamina (Persero) mempertahankan harga BBM untuk periode Januari 2024. Berikut daftar harga BBM terbaru dari Pertamina:\n\nPertalite (RON 90): Rp12.800 per liter\nPertamax (RON 92): Rp13.300 per liter\nPertamax Turbo (RON 98): Rp15.100 per liter\nDexlite (CN 51): Rp16.150 per liter\nPertamina Dex (CN 53): Rp16.850 per liter\n\nSementara itu, Shell Indonesia juga mengumumkan harga BBM terbarunya:\n\nShell Super (RON 92): Rp13.990 per liter\nShell V-Power (RON 95): Rp14.890 per liter\nShell V-Power Diesel (CN 51): Rp16.880 per liter\n\nBP-AKR menetapkan harga BBM sebagai berikut:\n\nBP 92: Rp13.990 per liter\nBP Ultimate (RON 95): Rp14.890 per liter\nBP Diesel: Rp16.860 per liter",
+  "source": "Sample Data for Development",
+  "tags": ["BBM", "Pertamina", "Shell", "BP-AKR", "Fuel Price"],
+  "priceData": {
+    "pertamina": {
+      "pertalite": 12800,
+      "pertamax": 13300,
+      "pertamax_turbo": 15100,
+      "dexlite": 16150,
+      "pertamina_dex": 16850
+    },
+    "shell": {
+      "super": 13990,
+      "v_power": 14890,
+      "v_power_diesel": 16880
+    },
+    "bp": {
+      "bp92": 13990,
+      "bp_ultimate": 14890,
+      "bp_diesel": 16860
+    }
+  }
+}
