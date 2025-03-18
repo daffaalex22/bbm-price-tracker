@@ -129,6 +129,9 @@ async function summarizeText(inputText) {
 }
 
 // Main execution
+// TODO: Remove html tags from extracted extracted contents
+// TODO: Ask about this problem in Stackoverflow, Cohere Community, Cohere Support
+// TODO: Revise the prompting, might have consistent result with better prompts
 async function main() {
     try {
         // Fetch news articles
@@ -150,16 +153,15 @@ async function main() {
             }
         }
 
-        await fs.writeFile(
-            './data/sample-full-articles.json',
-            JSON.stringify(extractedContents, null, 2)
-        );
-
         const fullArticles = newsArticles.map(article => ({
             ...article,
-            publishedDate: new Date(article.date),
             content: extractedContents[article.link]
         }));
+
+        await fs.writeFile(
+            './data/sample-full-articles.json',
+            JSON.stringify(fullArticles, null, 2)
+        );
 
         const articleData = JSON.parse(await fs.readFile('./data/sample-article.json', 'utf8'));
         const summary = await summarizeText(fullArticles);
