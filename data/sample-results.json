@@ -1,0 +1,22 @@
+{
+  "prices": {
+    "Pertamina": {
+      "pertalite": "10,000 IDR",
+      "pertamax": "14,000 IDR",
+      "pertamax-turbo": "16,000 IDR",
+      "pertamina-dex": "15,000 IDR",
+      "dexlite": "13,000 IDR"
+    },
+    "Shell": {
+      "shell-super": "14,500 IDR",
+      "shell-v-power": "17,000 IDR",
+      "shell-v-power-diesel": "16,500 IDR"
+    },
+    "BP-AKR": {
+      "bp-92": "10,500 IDR",
+      "bp-ultimate": "15,000 IDR",
+      "bp-diesel": "14,500 IDR",
+      "bp-ultimate-diesel": "17,000 IDR"
+    }
+  }
+}

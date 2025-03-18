@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBM Price Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" type="module"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">BBM Price Tracker</h1>
+            <p class="text-xl text-gray-600">Harga BBM Hari Ini</p>
+        </header>
+
+        <main>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pertamina Card -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Pertamina</h2>
+                    <div id="pertamina-prices" class="space-y-3">
+                        <p class="text-gray-500">Loading prices...</p>
+                    </div>
+                </div>
+
+                <!-- Shell Card -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Shell</h2>
+                    <div id="shell-prices" class="space-y-3">
+                        <p class="text-gray-500">Loading prices...</p>
+                    </div>
+                </div>
+
+                <!-- BP-AKR Card -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">BP-AKR</h2>
+                    <div id="bp-prices" class="space-y-3">
+                        <p class="text-gray-500">Loading prices...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center text-sm text-gray-500">
+                <p>Last updated: <span id="last-updated">Loading...</span></p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

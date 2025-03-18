@@ -3,6 +3,10 @@ import { CohereClientV2 } from 'cohere-ai';
 import { promises as fs } from 'fs';
 import { extract } from '@extractus/article-extractor';
 import fetchFuelPriceNews from './serp.js';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const cohere = new CohereClientV2({
     token: process.env.COHERE_API_KEY,
@@ -163,14 +167,40 @@ async function main() {
             JSON.stringify(fullArticles, null, 2)
         );
 
-        const articleData = JSON.parse(await fs.readFile('./data/sample-article.json', 'utf8'));
         const summary = await summarizeText(fullArticles);
         const jsonData = JSON.parse(summary);
 
         console.log('Summary:', jsonData);
+
+        await fs.writeFile(
+            './data/sample-results.json',
+            JSON.stringify(jsonData, null, 2)
+        );
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-main();
+const app = express();
+app.use(cors());
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Serve static files
+app.use(express.static('public'));
+
+// Serve the JSON data
+app.get('/api/prices', async (req, res) => {
+    try {
+        const data = await fs.readFile('./data/sample-results.json', 'utf8');
+        res.json(JSON.parse(data));
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Start server after main processing
+main().then(() => {
+    app.listen(3000, () => {
+        console.log('Server running at http://localhost:3000');
+    });
+});
