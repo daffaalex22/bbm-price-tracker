@@ -1,6 +1,6 @@
 async function fetchPrices() {
   try {
-      const response = await fetch('http://localhost:3000/api/prices');
+      const response = await fetch('/api/prices');
       const data = await response.json();
       
       // Update prices for each provider
