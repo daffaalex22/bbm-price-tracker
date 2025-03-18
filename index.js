@@ -1,49 +1,32 @@
 require("dotenv").config();
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-
-// Add new imports
+const { CohereClientV2 } = require('cohere-ai');
 const fs = require('fs').promises;
 
+const cohere = new CohereClientV2({
+    token: process.env.COHERE_API_KEY,
+});
+
 async function summarizeText(text) {
-    try {
-        const prompt = `Convert this fuel price update into a structured JSON format. Include date (YYYY-MM), currency (IDR), 
-        current USD exchange rate, and prices for Pertamina, Shell, and BP-AKR brands. Format numbers as integers without 
-        'k' or thousand separators.
+    const prompt = `Convert this fuel price update into a structured JSON format. Include date (YYYY-MM), currency (IDR), 
+    current USD exchange rate, and prices for Pertamina, Shell, and BP-AKR brands. Format numbers as integers without 
+    'k' or thousand separators. Don't give me any other text other than the JSON.
 
-        ${text}`;
+    ${text}`;
 
-        const response = await fetch(
-            "https://api.cohere.ai/v1/generate",
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${process.env.COHERE_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    model: 'command',
-                    max_tokens: 500,
-                    temperature: 0.1,
-                    format: 'json'
-                }),
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await cohere.chat({
+        messages: [{
+            role: 'user',
+            content: prompt
+        }],
+        model: 'command-a-03-2025',
+        responseFormat: {
+            type: 'json_object'
         }
+    });
 
-        const result = await response.json();
-        // Parse and validate the generated JSON
-        const generatedText = result.generations[0].text;
-        // const parsedData = JSON.parse(generatedText);
+    const generatedText = response.message.content[0].text;
 
-        return generatedText;
-    } catch (error) {
-        console.error("Error:", error.message);
-        throw error;
-    }
+    return generatedText;
 }
 
 // Main execution
