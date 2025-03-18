@@ -128,7 +128,7 @@ async function main() {
         const summary = await summarizeText(articleData.content);
         const jsonData = JSON.parse(summary);
 
-        console.log('Summary:', summary);
+        console.log('Summary:', jsonData);
     } catch (error) {
         console.error('Error:', error);
     }
