@@ -1,4 +1,4 @@
-const { getJson } = require('serpapi');
+import { getJson } from 'serpapi';
 
 async function fetchFuelPriceNews() {
     try {
@@ -34,4 +34,4 @@ async function fetchFuelPriceNews() {
     }
 }
 
-module.exports = { fetchFuelPriceNews };
+export default { fetchFuelPriceNews };
