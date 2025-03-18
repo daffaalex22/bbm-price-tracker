@@ -24,5 +24,29 @@
       "bp_ultimate": 14890,
       "bp_diesel": 16860
     }
+  },
+  "res": {
+    "date": "2024-01",
+    "currency": "IDR",
+    "usd_exchange_rate": 15500,
+    "prices": {
+      "Pertamina": {
+        "Pertalite (RON 90)": 12800,
+        "Pertamax (RON 92)": 13300,
+        "Pertamax Turbo (RON 98)": 15100,
+        "Dexlite (CN 51)": 16150,
+        "Pertamina Dex (CN 53)": 16850
+      },
+      "Shell": {
+        "Shell Super (RON 92)": 13990,
+        "Shell V-Power (RON 95)": 14890,
+        "Shell V-Power Diesel (CN 51)": 16880
+      },
+      "BP-AKR": {
+        "BP 92": 13990,
+        "BP Ultimate (RON 95)": 14890,
+        "BP Diesel": 16860
+      }
+    }
   }
 }
