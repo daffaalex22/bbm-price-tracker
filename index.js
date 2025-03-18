@@ -133,9 +133,11 @@ async function summarizeText(inputText) {
 }
 
 // Main execution
+// TODO: For BP, Shell and Pertamina, just scrape their main site. Can use Google News for Vivo
 // TODO: Remove html tags from extracted extracted contents
 // TODO: Ask about this problem in Stackoverflow, Cohere Community, Cohere Support
 // TODO: Revise the prompting, might have consistent result with better prompts
+// TODO: Separate scheduler function and API function
 async function main() {
     try {
         // Fetch news articles
