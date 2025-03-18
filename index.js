@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { CohereClientV2 } = require('cohere-ai');
 const fs = require('fs').promises;
+const { fetchFuelPriceNews } = require('./serp');
 
 const cohere = new CohereClientV2({
     token: process.env.COHERE_API_KEY,
@@ -124,6 +125,8 @@ async function summarizeText(text) {
 // Main execution
 async function main() {
     try {
+        const newsArticles = JSON.parse(await fs.readFile('./data/sample-articles.json', 'utf8'));
+        console.log('Found news articles:', newsArticles);
         const articleData = JSON.parse(await fs.readFile('./data/sample-article.json', 'utf8'));
         const summary = await summarizeText(articleData.content);
         const jsonData = JSON.parse(summary);
