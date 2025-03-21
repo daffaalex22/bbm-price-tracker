@@ -9,6 +9,13 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "nodemonConfig": {
+    "ext": "js",
+    "ignore": [
+      "./data/*"
+    ],
+    "delay": "2"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

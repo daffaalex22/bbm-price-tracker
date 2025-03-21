@@ -19,19 +19,25 @@ async function summarizeText(inputText, documents) {
         "currency": "IDR",
         "prices": {
             "Pertamina": {
-            "<fuel name (RON/CN)>": Rp <price>,
-            ...
+                "<fuel name (RON/CN)>": Rp <price>,
+                ...
             },
             "Shell": {
-            "<fuel name (RON/CN)>": Rp <price>,
-            ...
+                "<fuel name (RON/CN)>": Rp <price>,
+                ...
             },
             "BP-AKR": {
-            "<fuel name (RON/CN)>": Rp <price>,
-            ...
+                "<fuel name (RON/CN)>": Rp <price>,
+                ...
+            },
+            "Vivo": {
+                "<fuel name (RON/CN)>": Rp <price>,
+                ...
             }
         }
     }
+
+    Upon finding conflict in price, pick the one that are backed by most document.
 
     Ensure each company's prices are at the same level under "prices" and not nested within each other. Also ensure that the price is accurate to the last three digits. Only return a JSON string. Don't do JSON markdown.`;
 
@@ -94,7 +100,10 @@ async function main() {
         );
 
         const summary = await summarizeText(fullArticles, articlesContent);
-        const summaryClean = summary.replace(/^```json\s*/g, '').replace(/\s*```$/g, '');
+        const summaryClean = summary.substring(summary.indexOf('```json')).replace(/^```json\s*/g, '').replace(/\s*```$/g, '');
+
+        console.log("summaryClean", summaryClean)
+
         const jsonData = JSON.parse(summaryClean)
 
         console.log('Summary:', jsonData);

@@ -1,7 +1,6 @@
 {
   "date": "2025-03",
   "currency": "IDR",
-  "usd_exchange_rate": null,
   "prices": {
     "Pertamina": {
       "Pertalite (RON 90)": "Rp 10.000",
@@ -12,16 +11,22 @@
       "Pertamina Dex (CN 53)": "Rp 14.600"
     },
     "Shell": {
-      "Shell Super (RON 92)": "Rp 12.810",
-      "Shell V-Power (RON 95)": "Rp 13.530",
-      "Shell V-Power Diesel (CN 51)": "Rp 14.030",
-      "Shell V-Power Nitro+": "Rp 13.730"
+      "Shell Super (RON 92)": "Rp 13.590",
+      "Shell V-Power (RON 95)": "Rp 14.060",
+      "Shell V-Power Diesel (CN 51)": "Rp 14.760",
+      "Shell V-Power Nitro+ (RON 98)": "Rp 14.240"
     },
     "BP-AKR": {
-      "BP 92 (RON 92)": "Rp 13.200",
-      "BP Ultimate (RON 95)": "Rp 13.940",
-      "BP Diesel (CN 53)": "Rp 14.680",
-      "BP Ultimate Diesel (CN 53)": "Rp 15.030"
+      "BP 92 (RON 92)": "Rp 13.300",
+      "BP Ultimate (RON 95)": "Rp 14.060",
+      "BP Diesel (CN 53)": "Rp 14.380",
+      "BP Ultimate Diesel (CN 53)": "Rp 14.760"
+    },
+    "Vivo": {
+      "Revvo 90 (RON 90)": "Rp 13.200",
+      "Revvo 92 (RON 92)": "Rp 13.590",
+      "Revvo 95 (RON 95)": "Rp 14.060",
+      "Diesel Primus Plus (CN 51)": "Rp 14.760"
     }
   }
 }

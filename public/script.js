@@ -7,6 +7,7 @@ async function fetchPrices() {
       updateProviderPrices('pertamina-prices', data.prices.Pertamina);
       updateProviderPrices('shell-prices', data.prices.Shell);
       updateProviderPrices('bp-prices', data.prices['BP-AKR']);
+      updateProviderPrices('vivo-prices', data.prices.Vivo);
 
       // Update last updated timestamp
       const lastUpdated = new Date().toLocaleString('id-ID', {
@@ -45,7 +46,7 @@ function formatFuelName(name) {
 }
 
 function showError() {
-  const containers = ['pertamina-prices', 'shell-prices', 'bp-prices'];
+    const containers = ['pertamina-prices', 'shell-prices', 'bp-prices', 'vivo-prices'];
   containers.forEach(id => {
       document.getElementById(id).innerHTML = 
           '<p class="text-red-500">Failed to load prices</p>';
