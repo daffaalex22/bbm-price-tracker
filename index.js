@@ -12,8 +12,8 @@ const cohere = new CohereClientV2({
     token: process.env.COHERE_API_KEY,
 });
 
-async function summarizeText(inputText) {
-    const prompt = `I have some articles from some news source which contain fuel price data. Extract fuel prices from the multiple articles that I provide if there are conflict or different value from different article, stick to the one that's published the lates. Return the result in JSON format with this exact structure:
+async function summarizeText(inputText, documents) {
+    const prompt = `I have some articles from some news source which contain fuel price data. Extract fuel prices from the multiple articles that I provide if there are conflict or different value from different article, stick to the one that's published the latest. Return the result in JSON format with this exact structure:
     {
         "date": "<YYYY-MM>",
         "currency": "IDR",
@@ -34,97 +34,16 @@ async function summarizeText(inputText) {
         }
     }
 
-    Ensure each company's prices are at the same level under "prices" and not nested within each other. Also ensure that the price is accurate to the last three digits.
-
-    The articles:
-    ${inputText}`;
+    Ensure each company's prices are at the same level under "prices" and not nested within each other. Also ensure that the price is accurate to the last three digits. Only return a JSON string. Don't do JSON markdown.`;
 
 
     const response = await cohere.chat({
         messages: [{
             role: 'user',
-            content: "Hello"
+            content: prompt
         }],
         model: 'command-a-03-2025',
-        responseFormat: {
-            type: 'json_object',
-            schema: {
-                type: "object",
-                required: ["prices"],
-                properties: {
-                    prices: {
-                        type: "object",
-                        required: ["Pertamina", "Shell", "BP-AKR"],
-                        properties: {
-                            Pertamina: {
-                                type: "object",
-                                required: [
-                                    "pertalite",
-                                    "pertamax",
-                                    "pertamax-turbo",
-                                    "pertamina-dex",
-                                    "dexlite",
-                                ],
-                                properties: {
-                                    "pertalite": {
-                                        type: "string"
-                                    },
-                                    "pertamax": {
-                                        type: "string"
-                                    },
-                                    "pertamax-turbo": {
-                                        type: "string"
-                                    },
-                                    "pertamina-dex": {
-                                        type: "string"
-                                    },
-                                    "dexlite": {
-                                        type: "string"
-                                    }
-                                }
-                            },
-                            Shell: {
-                                type: "object",
-                                required: [
-                                    "shell-super",
-                                    "shell-v-power",
-                                    "shell-v-power-diesel",
-                                ],
-                                properties: {
-                                    "shell-super": {
-                                        type: "string"
-                                    },
-                                    "shell-v-power": {
-                                        type: "string"
-                                    },
-                                    "shell-v-power-diesel": {
-                                        type: "string"
-                                    }
-                                }
-                            },
-                            "BP-AKR": {
-                                type: "object",
-                                required: ["bp-92", "bp-ultimate", "bp-diesel", "bp-ultimate-diesel"],
-                                properties: {
-                                    "bp-92": {
-                                        type: "string"
-                                    },
-                                    "bp-ultimate": {
-                                        type: "string"
-                                    },
-                                    "bp-diesel": {
-                                        type: "string"
-                                    },
-                                    "bp-ultimate-diesel": {
-                                        type: "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        documents,
     });
 
     const generatedText = response.message.content[0].text;
@@ -164,13 +83,16 @@ async function main() {
             content: extractedContents[article.link]
         }));
 
+        const articlesContent = fullArticles.map(article => article.content || "");
+
         await fs.writeFile(
             './data/sample-full-articles.json',
             JSON.stringify(fullArticles, null, 2)
         );
 
-        const summary = await summarizeText(fullArticles);
-        const jsonData = JSON.parse(summary);
+        const summary = await summarizeText(fullArticles, articlesContent);
+        const summaryClean = summary.replace(/^```json\s*/g, '').replace(/\s*```$/g, '');
+        const jsonData = JSON.parse(summaryClean)
 
         console.log('Summary:', jsonData);
 
