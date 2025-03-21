@@ -17,7 +17,6 @@ async function summarizeText(inputText, documents) {
     {
         "date": "<YYYY-MM>",
         "currency": "IDR",
-        "usd_exchange_rate": <number>,
         "prices": {
             "Pertamina": {
             "<fuel name (RON/CN)>": Rp <price>,
@@ -71,7 +70,11 @@ async function main() {
             try {
                 const extractResult = await extract(newsUrls[i]);
                 if (extractResult && extractResult.content) {
-                    extractedContents[newsUrls[i]] = extractResult.content;
+                    const cleanText = extractResult.content
+                        .replace(/<[^>]*>/g, '') // Remove HTML tags
+                        .replace(/\s+/g, ' ')    // Normalize whitespace
+                        .trim();
+                    extractedContents[newsUrls[i]] = cleanText;
                 }
             } catch (error) {
                 console.error(`Error extracting content from ${newsUrls[i]}:`, error);

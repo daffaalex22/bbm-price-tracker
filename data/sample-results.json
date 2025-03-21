@@ -4,24 +4,24 @@
   "usd_exchange_rate": null,
   "prices": {
     "Pertamina": {
-      "Pertalite (RON 90)": "Rp10.000",
-      "Pertamax (RON 92)": "Rp12.900",
-      "Pertamax Green 95 (RON 95)": "Rp13.700",
-      "Pertamax Turbo (RON 98)": "Rp14.000",
-      "Dexlite (CN 51)": "Rp14.300",
-      "Pertamina Dex (CN 53)": "Rp14.600"
+      "Pertalite (RON 90)": "Rp 10.000",
+      "Pertamax (RON 92)": "Rp 12.900",
+      "Pertamax Green 95 (RON 95)": "Rp 13.700",
+      "Pertamax Turbo (RON 98)": "Rp 14.000",
+      "Dexlite (CN 51)": "Rp 14.300",
+      "Pertamina Dex (CN 53)": "Rp 14.600"
     },
     "Shell": {
-      "Shell Super (RON 92)": "Rp12.810",
-      "Shell V-Power (RON 95)": "Rp13.530",
-      "Shell V-Power Diesel (CN 51)": "Rp14.030",
-      "Shell V-Power Nitro+": "Rp13.730"
+      "Shell Super (RON 92)": "Rp 12.810",
+      "Shell V-Power (RON 95)": "Rp 13.530",
+      "Shell V-Power Diesel (CN 51)": "Rp 14.030",
+      "Shell V-Power Nitro+": "Rp 13.730"
     },
     "BP-AKR": {
-      "BP 92 (RON 92)": "Rp13.200",
-      "BP Ultimate (RON 95)": "Rp13.940",
-      "BP Diesel (CN 48)": "Rp14.680",
-      "BP Ultimate Diesel (CN 53)": "Rp15.030"
+      "BP 92 (RON 92)": "Rp 13.200",
+      "BP Ultimate (RON 95)": "Rp 13.940",
+      "BP Diesel (CN 53)": "Rp 14.680",
+      "BP Ultimate Diesel (CN 53)": "Rp 15.030"
     }
   }
 }
