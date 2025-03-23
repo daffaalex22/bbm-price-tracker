@@ -3,7 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { promises as fs } from 'fs';
-import { processData } from './dataProcessor.js';
+import { processData, scheduleDataUpdate } from './processor.js';
 
 const app = express();
 app.use(cors());
@@ -29,6 +29,7 @@ app.get('/api/keep-alive', (req, res) => {
 
 // Initialize data processing and start server
 processData().then(() => {
+    scheduleDataUpdate(); // Start the scheduling
     app.listen(3000, () => {
         console.log('Server running at http://localhost:3000');
     });

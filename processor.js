@@ -1,11 +1,23 @@
 import 'dotenv/config';
 import { promises as fs } from 'fs';
+import serp from './serp.js';
+import { summarizeText } from './cohere.js';
 import { extract } from '@extractus/article-extractor';
-import { summarizeText } from './cohereService.js';
+
+async function saveResults(data, path = './data/sample-results.json') {
+    await fs.writeFile(path, JSON.stringify(data, null, 2));
+}
 
 export async function processData() {
     try {
-        const newsArticles = JSON.parse(await fs.readFile('./data/sample-articles.json', 'utf8'));
+        let newsArticles;
+        if (process.env.NODE_ENV === 'production') {
+            newsArticles = await serp.fetchFuelPriceNews();
+            await saveResults(newsArticles, './data/sample-articles.json');
+        } else {
+            newsArticles = JSON.parse(await fs.readFile('./data/sample-articles.json', 'utf8'));
+        }
+
         const newsUrls = newsArticles.map(article => article.link);
 
         const extractedContents = {};
@@ -13,6 +25,7 @@ export async function processData() {
             try {
                 const extractResult = await extract(newsUrls[i]);
                 if (extractResult && extractResult.content) {
+                  // Cleaning up the extracted HTML
                     const cleanText = extractResult.content
                         .replace(/<[^>]*>/g, '')
                         .replace(/\s+/g, ' ')
@@ -37,17 +50,41 @@ export async function processData() {
         );
 
         const summary = await summarizeText(fullArticles, articlesContent);
+
+        // Cleaning up the markdown code block
         const summaryClean = summary.substring(summary.indexOf('```json')).replace(/^```json\s*/g, '').replace(/\s*```$/g, '');
         const jsonData = JSON.parse(summaryClean);
 
-        await fs.writeFile(
-            './data/sample-results.json',
-            JSON.stringify(jsonData, null, 2)
-        );
+        await saveResults(jsonData);
 
-        return jsonData;
+        return;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error processing data:', error);
         throw error;
     }
 }
+
+// Schedule daily updates at 12 PM
+function scheduleDataUpdate() {
+    const now = new Date();
+    const nextNoon = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        12, 0, 0
+    );
+    
+    if (now > nextNoon) {
+        nextNoon.setDate(nextNoon.getDate() + 1);
+    }
+    
+    const msUntilNextUpdate = nextNoon.getTime() - now.getTime();
+    
+    setTimeout(() => {
+        processData()
+            .catch(error => console.error('Scheduled data processing failed:', error));
+        scheduleDataUpdate(); // Schedule next update
+    }, msUntilNextUpdate);
+}
+
+export { scheduleDataUpdate };
