@@ -5,10 +5,11 @@
     "Pertamina": {
       "Pertalite (RON 90)": "Rp 10.000",
       "Pertamax (RON 92)": "Rp 12.900",
-      "Pertamax Green 95 (RON 95)": "Rp 13.700",
-      "Pertamax Turbo (RON 98)": "Rp 14.000",
+      "Pertamax Turbo": "Rp 14.000",
+      "Pertamax Green 95": "Rp 13.700",
       "Dexlite (CN 51)": "Rp 14.300",
-      "Pertamina Dex (CN 53)": "Rp 14.600"
+      "Pertamina Dex (CN 53)": "Rp 14.600",
+      "Solar (CN 48)": "Rp 6.800"
     },
     "Shell": {
       "Shell Super (RON 92)": "Rp 13.590",
@@ -17,10 +18,10 @@
       "Shell V-Power Nitro+ (RON 98)": "Rp 14.240"
     },
     "BP-AKR": {
-      "BP 92 (RON 92)": "Rp 13.300",
       "BP Ultimate (RON 95)": "Rp 14.060",
-      "BP Diesel (CN 51)": "Rp 14.380",
-      "BP Ultimate Diesel (CN 53)": "Rp 14.760"
+      "BP 92 (RON 92)": "Rp 13.300",
+      "BP Ultimate Diesel (CN 53)": "Rp 14.760",
+      "BP Diesel (CN 51)": "Rp 14.380"
     },
     "Vivo": {
       "Revvo 90 (RON 90)": "Rp 13.200",
