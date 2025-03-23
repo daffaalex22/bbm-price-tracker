@@ -134,6 +134,14 @@ app.get('/api/prices', async (req, res) => {
     }
 });
 
+// Add keep-alive endpoint
+app.get('/api/keep-alive', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Start server after main processing
 main().then(() => {
     app.listen(3000, () => {

@@ -1,0 +1,15 @@
+name: Keep Alive
+
+on:
+  schedule:
+    # Runs every 12 minutes
+    - cron: '*/12 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Keep Alive Endpoint
+        run: |
+          curl -X GET https://bbm-price-tracker.onrender.com/api/keep-alive
